@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>图片左右拖拽对比js插件image-compare-viewer</title>
+        <link href="dist/image-compare-viewer.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+        <style>
+            .container {
+                margin: 150px auto;
+                max-width: 960px;
+            }
+            .upload-container {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+            }
+            .upload-square-button {
+                /* 按钮样式 */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100px;
+                height: 100px;
+                background-color: #f0f0f0;
+                cursor: pointer;
+                /* 图标和文本样式 */
+                flex-direction: column;
+                text-align: center;
+            }
+            .upload-icon {
+                font-size: 48px;
+                color: #888888;
+            }
+            .upload-text {
+                margin-top: 10px;
+                font-size: 14px;
+                color: #888888;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Image Compare Viewer Example</h1>
+            <h2>Horizontal</h2>
+            <div id="image-compare1">
+                <div class="upload-container">
+                    <label for="image1" class="upload-square-button">
+                        <i class="fas fa-upload upload-icon"></i>
+                        <div class="upload-text">Upload Image 1</div>
+                    </label>
+                    <input type="file" id="image1" accept="image/*" style="display: none;">
+                    <label for="image2" class="upload-square-button">
+                        <i class="fas fa-upload upload-icon"></i>
+                        <div class="upload-text">Upload Image 2</div>
+                    </label>
+                    <input type="file" id="image2" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            <h2>Vertical</h2>
+            <div id="image-compare2">
+                <div class="upload-container">
+                    <label for="image3" class="upload-square-button">
+                        <i class="fas fa-upload upload-icon"></i>
+                        <div class="upload-text">Upload Image 3</div>
+                    </label>
+                    <input type="file" id="image3" accept="image/*" style="display: none;">
+                    <label for="image4" class="upload-square-button">
+                        <i class="fas fa-upload upload-icon"></i>
+                        <div class="upload-text">Upload Image 4</div>
+                    </label>
+                    <input type="file" id="image4" accept="image/*" style="display: none;">
+                </div>
+            </div>
+        </div>
+        <script src="dist/image-compare-viewer.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+        <script>
+            const element = document.getElementById("image-compare1");
+            const image1 = document.getElementById("image1");
+            const image2 = document.getElementById("image2");
+
+            image1.addEventListener("change", function() {
+                const file1 = image1.files[0];
+                const reader1 = new FileReader();
+                reader1.onload = function(e) {
+                    const img1 = document.createElement("img");
+                    img1.src = e.target.result;
+                    element.innerHTML = "";
+                    element.appendChild(img1);
+                    if (image2.files.length > 0) {
+                        const file2 = image2.files[0];
+                        const reader2 = new FileReader();
+                        reader2.onload = function(e) {
+                            const img2 = document.createElement("img");
+                            img2.src = e.target.result;
+                            element.appendChild(img2);
+                            const viewer = new ImageCompare(element, { addCircle: true }).mount();
+                        };
+                        reader2.readAsDataURL(file2);
+                    }
+                };
+                reader1.readAsDataURL(file1);
+            });
+
+            const element2 = document.getElementById("image-compare2");
+            const image3 = document.getElementById("image3");
+            const image4 = document.getElementById("image4");
+
+            image3.addEventListener("change", function() {
+                const file3 = image3.files[0];
+                const reader3 = new FileReader();
+                reader3.onload = function(e) {
+                    const img3 = document.createElement("img");
+                    img3.src = e.target.result;
+                    element2.innerHTML = "";
+                    element2.appendChild(img3);
+                    if (image4.files.length > 0) {
+                        const file4 = image4.files[0];
+                        const reader4 = new FileReader();
+                        reader4.onload = function(e) {
+                            const img4 = document.createElement("img");
+                            img4.src = e.target.result;
+                            element2.appendChild(img4);
+                            const viewer2 = new ImageCompare(element2, {
+                                verticalMode: true,
+                                addCircle: true
+                            }).mount();
+                        };
+                        reader4.readAsDataURL(file4);
+                    }
+                };
+                reader3.readAsDataURL(file3);
+            });
+        </script>
+    </body>
+</html>
