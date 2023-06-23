@@ -8,15 +8,22 @@
         <link href="dist/image-compare-viewer.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
         <style>
+            body {
+                background-color: #0F1C3F;
+                color: #FFFFFF;
+            }
+            
             .container {
                 margin: 150px auto;
                 max-width: 960px;
             }
+            
             .upload-container {
                 display: flex;
                 justify-content: space-between;
                 margin-bottom: 20px;
             }
+            
             .upload-square-button {
                 /* 按钮样式 */
                 display: flex;
@@ -24,37 +31,39 @@
                 justify-content: center;
                 width: 100px;
                 height: 100px;
-                background-color: #f0f0f0;
+                background-color: #00A4FF;
                 cursor: pointer;
                 /* 图标和文本样式 */
                 flex-direction: column;
                 text-align: center;
             }
+            
             .upload-icon {
                 font-size: 48px;
-                color: #888888;
+                color: #FFFFFF;
             }
+            
             .upload-text {
                 margin-top: 10px;
                 font-size: 14px;
-                color: #888888;
+                color: #FFFFFF;
             }
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>Image Compare Viewer Example</h1>
+            <h1 align="center" font-size:500px">Image Compare Viewer</h1>
             <h2>Horizontal</h2>
             <div id="image-compare1">
                 <div class="upload-container">
                     <label for="image1" class="upload-square-button">
                         <i class="fas fa-upload upload-icon"></i>
-                        <div class="upload-text">Upload Image 1</div>
+                        <div class="upload-text">Upload Image left</div>
                     </label>
                     <input type="file" id="image1" accept="image/*" style="display: none;">
                     <label for="image2" class="upload-square-button">
                         <i class="fas fa-upload upload-icon"></i>
-                        <div class="upload-text">Upload Image 2</div>
+                        <div class="upload-text">Upload Image right</div>
                     </label>
                     <input type="file" id="image2" accept="image/*" style="display: none;">
                 </div>
@@ -64,12 +73,12 @@
                 <div class="upload-container">
                     <label for="image3" class="upload-square-button">
                         <i class="fas fa-upload upload-icon"></i>
-                        <div class="upload-text">Upload Image 3</div>
+                        <div class="upload-text">Upload Image up</div>
                     </label>
                     <input type="file" id="image3" accept="image/*" style="display: none;">
                     <label for="image4" class="upload-square-button">
                         <i class="fas fa-upload upload-icon"></i>
-                        <div class="upload-text">Upload Image 4</div>
+                        <div class="upload-text">Upload Image down</div>
                     </label>
                     <input type="file" id="image4" accept="image/*" style="display: none;">
                 </div>
@@ -82,7 +91,7 @@
             const image1 = document.getElementById("image1");
             const image2 = document.getElementById("image2");
 
-            image1.addEventListener("change", function() {
+            image2.addEventListener("change", function() {
                 const file1 = image1.files[0];
                 const reader1 = new FileReader();
                 reader1.onload = function(e) {
@@ -109,7 +118,7 @@
             const image3 = document.getElementById("image3");
             const image4 = document.getElementById("image4");
 
-            image3.addEventListener("change", function() {
+            image4.addEventListener("change", function() {
                 const file3 = image3.files[0];
                 const reader3 = new FileReader();
                 reader3.onload = function(e) {
